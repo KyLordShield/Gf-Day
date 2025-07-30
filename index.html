@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy National Girlfriend Day 💙</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: url('blue flower.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #ffffff;
+      text-align: center;
+    }
+
+    .overlay {
+      background-color: rgba(0, 0, 50, 0.8);
+      padding: 40px 20px;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      font-size: 3em;
+      color: #a0c4ff;
+      margin-bottom: 30px;
+    }
+
+    .letter {
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid #a0c4ff;
+      border-radius: 15px;
+      padding: 20px;
+      max-width: 600px;
+      margin: 0 auto 30px;
+      color: #ffffff;
+    }
+
+    audio {
+      margin: 20px 0;
+      width: 100%;
+      max-width: 350px;
+    }
+
+    .photo-gallery {
+  display: flex;
+  flex-direction: column; /* stack vertically */
+  align-items: center;
+  gap: 20px;
+  margin: 30px auto;
+  max-width: 90%;
+}
+
+.photo-gallery img {
+  width: 320px;       /* landscape width */
+  height: 200px;      /* shorter height */
+  object-fit: cover;
+  border-radius: 15px;
+  border: 3px solid #60a5fa;
+  box-shadow: 0 0 10px rgba(96, 165, 250, 0.6);
+  transition: transform 0.3s ease;
+}
+
+
+    .photo-gallery img:hover {
+      transform: scale(1.05);
+    }
+
+    .game-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+      justify-content: center;
+      max-width: 350px;
+      margin: 40px auto;
+      gap: 12px;
+    }
+
+    .card {
+      background-color: #1e3a8a;
+      border: 2px solid #60a5fa;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 2em;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      aspect-ratio: 1 / 1;
+      color: transparent;
+      transition: 0.3s;
+      user-select: none;
+    }
+
+    .card.flipped {
+      background-color: #60a5fa;
+      color: #ffffff;
+    }
+
+    #message {
+      margin-top: 30px;
+      font-size: 1.1em;
+      color: #e0f2fe;
+      display: none;
+      max-width: 600px;
+      margin-inline: auto;
+      background: rgba(255,255,255,0.1);
+      border: 2px solid #3b82f6;
+      border-radius: 12px;
+      padding: 20px;
+      white-space: pre-wrap;
+    }
+
+    @media (max-width: 500px) {
+      h1 {
+        font-size: 2em;
+      }
+
+      .card {
+        font-size: 1.5em;
+      }
+
+      .game-container {
+        max-width: 280px;
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <h1>Happy National GF Day 💙</h1>
+
+    <div class="letter">
+      <p>To my Dearest,</p>
+      <p>I’m still learning how to express all these things and unsaon pag show love in moments like this. Diko sweto aning ‘Girlfriend Day’ or knowing what to do, Diko aware gani unta na naay inani hahaha. But I do know I don’t want to ignore it. Because you matter to me. </p>
+      <p>— Your Dear DoDong 💌</p>
+    </div>
+
+    <!-- Audio -->
+    <audio controls autoplay loop>
+      <source src="mysong.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+
+    <!-- Photo Gallery -->
+    <div class="photo-gallery">
+      <img src="Pic1.jpg" alt="Beautiful You 💙" />
+      <img src="Pic3.jpg" alt="Cute Moment 💙" />
+      <!-- Add more <img> if you want -->
+    </div>
+
+    <!-- Game -->
+    <h2 style="color: #bfdbfe;">💙 Matching Game of Love 💙</h2>
+    <p style="color:#dbeafe;">Match all the pairs to reveal your surprise!</p>
+    <div class="game-container" id="gameBoard"></div>
+
+    <div id="message">
+      🌹 <strong>A message for you</strong> 🌹
+
+Roses are red, violets are blue,  
+Every little moment feels perfect with you.  
+From laughter to silence, from chaos to calm,  
+You're the beat in my heart, the touch in my palm.
+
+Roses aren't all red, and violets will never be blue,  
+Sometimes it's cold, but I still love you.  
+Even when moods shift or you're feeling gray,  
+I’m still the one who’s choosing to stay.
+
+Love isn't poetry, soft and neat,  
+It's messy, wild, and still so sweet.  
+Yet through it all, one thing stays true.  
+No matter what, I'll choose you.
+
+You're my peace when I'm feeling torn,  
+My comfort on nights when I feel worn.  
+Every flaw you have, I see as art,  
+Because you're the masterpiece that stole my heart.
+
+So on this day, I want you to know,  
+Wherever life takes us, I’ll always show.  
+That loving you isn’t something I just say,  
+It’s something I promise, every day.
+    </div>
+  </div>
+
+  <script>
+    const emojis = ['💙','💌','🌙','🌸','🎵','💍','🌹','🐻'];
+    let cards = [...emojis, ...emojis];
+    let firstCard = null;
+    let lock = false;
+    let matched = 0;
+
+    cards.sort(() => 0.5 - Math.random());
+
+    const board = document.getElementById('gameBoard');
+    cards.forEach(symbol => {
+      const card = document.createElement('div');
+      card.classList.add('card');
+      card.dataset.symbol = symbol;
+      card.textContent = symbol;
+      board.appendChild(card);
+
+      card.addEventListener('click', () => {
+        if (lock || card.classList.contains('flipped')) return;
+
+        card.classList.add('flipped');
+
+        if (!firstCard) {
+          firstCard = card;
+        } else {
+          lock = true;
+          if (firstCard.dataset.symbol === card.dataset.symbol) {
+            matched += 2;
+            firstCard = null;
+            lock = false;
+            if (matched === cards.length) {
+              document.getElementById('message').style.display = 'block';
+              document.getElementById('message').scrollIntoView({ behavior: 'smooth' });
+            }
+          } else {
+            setTimeout(() => {
+              card.classList.remove('flipped');
+              firstCard.classList.remove('flipped');
+              firstCard = null;
+              lock = false;
+            }, 900);
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>
